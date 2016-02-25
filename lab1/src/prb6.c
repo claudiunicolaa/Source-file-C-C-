@@ -14,14 +14,13 @@
  * preconditions: -
  * postconditions: return a integer number
  */
-int read()
-{
-	int n;
+int read() {
+	int n, value;
 	do {
 		printf("Enter the N:");
 		fflush(stdout);
-		scanf("%d",&n);
-	} while(n<=0);
+		value = scanf("%d", &n);
+	} while (value == 0);
 	return n;
 }
 
@@ -30,11 +29,10 @@ int read()
  * preconditions: x > 0
  * postconditions: return a integer number
  */
-int factorial(int x)
-{
+int factorial(int x) {
 	int i;
 	int fact = 1;
-	for(i = 2; i<=x; i++){
+	for (i = 2; i <= x; i++) {
 		fact = fact * i;
 	}
 	return fact;
@@ -45,9 +43,8 @@ int factorial(int x)
  * preconditions: k>0, n>0
  * postconditions: return a integer number
  */
-int combinations(int n, int k)
-{
-	return factorial(n)/(factorial(k)*factorial(n-k));
+int combinations(int n, int k) {
+	return factorial(n) / (factorial(k) * factorial(n - k));
 }
 
 /*
@@ -56,18 +53,16 @@ int combinations(int n, int k)
  * preconditions: n>0
  * postconditions: -
  */
-void triangle(int n)
-{
-	int i,j,c;
+void triangle(int n) {
+	int i, j, c;
 	printf("1 \n");
-	for (i=1; i<=n;i++){
-		for (j=0; j<=n; j++){
-			c = combinations(i,j);
-			if (c==0) {
-				printf("%s","  ");
-			}
-			else{
-				printf("%d%s", combinations(i,j)," ");
+	for (i = 1; i <= n; i++) {
+		for (j = 0; j <= n; j++) {
+			c = combinations(i, j);
+			if (c == 0) {
+				printf("%s", "  ");
+			} else {
+				printf("%d%s", combinations(i, j), " ");
 			}
 
 		}
@@ -75,8 +70,7 @@ void triangle(int n)
 	}
 }
 
-int main()
-{
+int main() {
 	int n = read();
 	triangle(n);
 	return 0;
