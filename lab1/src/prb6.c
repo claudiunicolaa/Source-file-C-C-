@@ -7,20 +7,21 @@
  *  6. Tiparste triunghiul lui Pascal, cu toate combinarile C(m,k) de m obiecte
  *  luate cite k, k = 0, 1, ..., m, in linia m, pentru m = 1, 2, ..., n.
  */
-#include<stdio.h>
-#include<ctype.h>
+
+#include <stdio.h>
+
 /*
  * Read a integer number.
  * preconditions: -
  * postconditions: return a integer number
  */
 int read() {
-	int n, value;
-	do {
-		printf("Enter the N:");
-		fflush(stdout);
-		value = scanf("%d", &n);
-	} while (value == 0);
+	int n = 0;
+
+	printf("Enter the N:");
+	fflush(stdout);
+	scanf("%d", &n);
+
 	return n;
 }
 
