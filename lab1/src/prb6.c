@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 /*
  * Read a integer number.
@@ -26,53 +27,54 @@ int read() {
 }
 
 /*
- * Compute the factorial of number x
- * preconditions: x > 0
- * postconditions: return a integer number
- */
-int factorial(int x) {
-	int i;
-	int fact = 1;
-	for (i = 2; i <= x; i++) {
-		fact = fact * i;
-	}
-	return fact;
-}
-
-/*
- * Compute combinations of n taken k, C(n,k)
- * preconditions: k>0, n>0
- * postconditions: return a integer number
- */
-int combinations(int n, int k) {
-	return factorial(n) / (factorial(k) * factorial(n - k));
-}
-
-/*
- * Print Pascal's triangle with all C(m,k)
- * where m=1,2,3,...,n and k=0,1,2,...m
+ * Print Pascal's triangle, using two arrays.
  * preconditions: n>0
  * postconditions: -
  */
 void triangle(int n) {
-	int i, j, c;
-	printf("1 \n");
-	for (i = 1; i <= n; i++) {
-		for (j = 0; j <= n; j++) {
-			c = combinations(i, j);
-			if (c == 0) {
-				printf("%s", "  ");
-			} else {
-				printf("%d%s", combinations(i, j), " ");
-			}
-
+	int i, j, l = 0;
+	int array[50], temp[50];
+	temp[0] = 1;
+	array[0] = 1;
+	for (i = 1; i < n; i++) {
+		for (j = 1; j < n; j++) {
+			array[j] = temp[j - 1] + temp[j];
+		}
+		array[i] = 1;
+		for (l = 0; l <= i; l++) {
+			printf("%3d", array[l]);
+			temp[l] = array[l];
 		}
 		printf("\n");
 	}
+
+}
+
+/*
+ * Print the menu
+ * preconditions: -
+ * postconditions: -
+ */
+void menu() {
+	printf("Bine ati venit!\n");
+	printf("1. Triunghiul lui Pascal.\n");
+	printf("0. Iesire.\n");
+	printf("Introduceti optiunea: ");
 }
 
 int main() {
-	int n = read();
-	triangle(n);
+//	triangle(5);
+	int n = 0;
+	int opt = 1;
+	while (opt != 0) {
+		menu();
+		if (scanf("%d", &opt) == 0)
+			break;
+		if (opt == 1) {
+			n = read();
+			triangle(n);
+		}
+	}
+	printf("La revedere!");
 	return 0;
 }
