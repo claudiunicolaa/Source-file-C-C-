@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 Expense* initExpense(int id, int day, float money, char* type) {
 	Expense* item = (Expense*) malloc(sizeof(Expense));
 	item->id = id;

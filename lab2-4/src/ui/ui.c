@@ -40,12 +40,28 @@ void addCommand(Controller* ctrl) {
 
 void showCommand(Controller* ctrl) {
 	DynamicVector* vector = getAllAction(ctrl);
-	printDynamicVector(vector);
+	Expense* item;
+	int i = 0;
+	for (i = 0; i < getSize(vector); i++) {
+		item = findByPosition(vector, i);
+		printf("%4d %4d %8f %8s\n", item->id, item->day, item->money,
+				item->type);
+	}
 }
 void deleteCommand(Controller* ctrl) {
-	puts(SUCCES_MSG);
+	int id = 0;
+	puts("Sterge cheltuiala:");
+	puts("Introdu id-ul cheltuieli: ");
+	scanf("%d", &id);
+	int ok = deleteAction(ctrl, id);
+	if (ok == 1)
+		puts(SUCCES_MSG);
+	else
+		puts("Id-ul nu exista.");
 }
 void destroyAll(Controller* ctrl) {
+	freeRepository(ctrl->repo);
+	freeController(ctrl);
 }
 
 void runUi(Controller* ctrl) {
@@ -65,6 +81,7 @@ void runUi(Controller* ctrl) {
 			deleteCommand(ctrl);
 			break;
 		case 0:
+			writeAll(ctrl);
 			puts("\nLa revedere!!!");
 			return;
 		default:

@@ -66,6 +66,13 @@ void update(DynamicVector* vector, Item item) {
  * item - Item
  */
 void delete(DynamicVector* vector, Item item) {
+	int i = 0;
+	for (i = 0; i < vector->size; i++) {
+		if (vector->items[i] == item) {
+			vector->items[i] = vector->items[vector->size - 1];
+			vector->size--;
+		}
+	}
 }
 
 /**
@@ -74,6 +81,10 @@ void delete(DynamicVector* vector, Item item) {
  */
 int getSize(DynamicVector* vector) {
 	return vector->size;
+}
+
+Item findByPosition(DynamicVector* vector, int position) {
+	return vector->items[position];
 }
 
 /**

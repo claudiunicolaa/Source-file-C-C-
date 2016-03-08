@@ -26,7 +26,9 @@ int getLastId(Repository* repo);
  * file - FILE
  */
 Expense* readLine(FILE* file);
-void loadFile(Repository* repo);
+DynamicVector* loadFile(Repository* repo);
+void writeLine(FILE* file, Expense* item);
+void writeFile(Repository* repo);
 void deleteItem(Repository* repo, Expense* item);
 void freeRepository(Repository* repo);
 #endif /* REPOSITORY_REPOSITORY_H_ */

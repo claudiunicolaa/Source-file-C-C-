@@ -25,7 +25,26 @@ void addAction(Controller* ctrl, int day, float money, char* type) {
 DynamicVector* getAllAction(Controller* ctrl) {
 	return ctrl->repo->vector;
 }
-void deleteAction(Controller* ctrl) {
+
+void writeAll(Controller* ctrl) {
+	writeFile(ctrl->repo);
+}
+int deleteAction(Controller* ctrl, int id) {
+	int ok = 0;
+	int i = 0;
+	Expense* item;
+	DynamicVector* vector = getAllAction(ctrl);
+	for (i = 0; i < getSize(vector); i++) {
+		item = findByPosition(vector, i);
+		if (item->id == id) {
+			ok = 1;
+			deleteItem(ctrl->repo, item);
+			break;
+		}
+	}
+	return ok;
+
 }
 void freeController(Controller* ctrl) {
+	free(ctrl);
 }

@@ -18,6 +18,7 @@ typedef struct {
 Controller* initController(Repository* repo);
 void addAction(Controller* ctrl, int day, float money, char* type);
 DynamicVector* getAllAction(Controller* ctrl);
-void deleteAction(Controller* ctrl);
+void writeAll(Controller* ctrl);
+int deleteAction(Controller* ctrl, int id);
 void freeController(Controller* ctrl);
 #endif /* CONTROLLER_CONTROLLER_H_ */

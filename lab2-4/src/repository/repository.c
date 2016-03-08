@@ -16,7 +16,7 @@ Repository* initRepository(char* fileName) {
 	repo->fileName = (char*) malloc(sizeof(char) * strlen(fileName) + 1);
 	strcpy(repo->fileName, fileName);
 	repo->vector = initDynamicVector(50);
-//	repo->vector = loadFile(repo);
+	repo->vector = loadFile(repo);
 	return repo;
 }
 void addItem(Repository* repo, Expense* item) {
@@ -25,14 +25,7 @@ void addItem(Repository* repo, Expense* item) {
 
 int getLastId(Repository* repo) {
 	int id = 0;
-	id = getSize(repo->vector);
-//	FILE* file;
-//	file = fopen(repo->fileName, "r");
-//	fseek(file, -LINE_LENGTH, SEEK_END);
-//	Expense* item;
-//	item = readLine(file);
-//	fclose(file);
-//	id = item->id + 1;
+	id = getSize(repo->vector) + 1;
 	return id;
 }
 
@@ -61,15 +54,39 @@ Expense* readLine(FILE* file) {
 	item = initExpense(id, day, money, token);
 	return item;
 }
-void loadFile(Repository* repo) {
+
+DynamicVector* loadFile(Repository* repo) {
+	Expense* item;
 	FILE* file;
-	char* line;
 	file = fopen(repo->fileName, "r");
-	line = malloc(sizeof(char) * 50);
-	fgets(line, 50, file);
+	while (1) {
+		item = readLine(file);
+		if (item)
+			add(repo->vector, (Item*) item);
+		else
+			break;
+	}
+	fclose(file);
+	return repo->vector;
+}
+
+void writeLine(FILE* file, Expense* item) {
+	fprintf(file, "%d#%d#%f#%s\n", item->id, item->day, item->money,
+			item->type);
+}
+
+void writeFile(Repository* repo) {
+	FILE* file;
+	file = fopen(repo->fileName, "w");
+	int i = 0;
+	for (i = 0; i < getSize(repo->vector); i++) {
+		writeLine(file, findByPosition(repo->vector, i));
+	}
 	fclose(file);
 }
+
 void deleteItem(Repository* repo, Expense* item) {
+	delete(repo->vector, item);
 }
 void freeRepository(Repository* repo) {
 }
