@@ -6,20 +6,25 @@
  */
 
 #include <src/controller/controller.h>
-#include <stdio.h>
+#include <src/domain/expense.h>
+#include <src/domain/validator.h>
 #include <stdlib.h>
 
 Controller* initController(Repository* repo) {
 	Controller* ctrl = (Controller*) malloc(sizeof(Controller));
 	ctrl->repo = repo;
-
 	return ctrl;
 }
 void addAction(Controller* ctrl, int day, float money, char* type) {
 	int id = 0;
 	id = getLastId(ctrl->repo);
 	Expense* item = initExpense(id, day, money, type);
-	addItem(ctrl->repo, item);
+	ctrl->valid = validateExpense(item);
+	if (getErrorsNumber(ctrl->valid) > 1) {
+		destroyExpense(item);
+		return;
+	} else
+		addItem(ctrl->repo, item);
 }
 
 DynamicVector* getAllAction(Controller* ctrl) {

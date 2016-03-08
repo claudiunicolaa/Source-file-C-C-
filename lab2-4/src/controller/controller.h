@@ -13,6 +13,7 @@
 
 typedef struct {
 	Repository* repo;
+	char** valid;
 } Controller;
 
 Controller* initController(Repository* repo);

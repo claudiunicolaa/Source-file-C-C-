@@ -6,8 +6,12 @@
  */
 
 #include <src/controller/controller.h>
-#include <stdio.h>
+#include <src/domain/expense.h>
+#include <src/domain/validator.h>
+#include <src/repository/repository.h>
 #include <src/util/constants.h>
+#include <src/util/dynamicVector.h>
+#include <stdio.h>
 
 void printMenu() {
 	puts("1.Adauga cheltuiala.");
@@ -35,7 +39,13 @@ void addCommand(Controller* ctrl) {
 			"telefon&internet,imbracaminte,altele");
 	scanf("%s", type);
 	addAction(ctrl, day, money, type);
-	puts(SUCCES_MSG);
+	if (getErrorsNumber(ctrl->valid) > 0) {
+		int i = 0;
+		for (i = 1; i < getErrorsNumber(ctrl->valid); i++) {
+			puts(ctrl->valid[i]);
+		}
+	} else
+		puts(SUCCES_MSG);
 }
 
 void showCommand(Controller* ctrl) {

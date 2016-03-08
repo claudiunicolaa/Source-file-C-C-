@@ -15,5 +15,18 @@ typedef struct {
 	char* type;
 } Expense;
 
+/**
+ * Construct
+ * id - int
+ * day - int
+ * money - float
+ * type - char*
+ */
 Expense* initExpense(int id, int day, float money, char* type);
+
+/**
+ * Destructor
+ * item - Expense
+ */
+void destroyExpense(Expense* item);
 #endif /* DOMAIN_EXPENSE_H_ */
