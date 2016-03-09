@@ -5,5 +5,9 @@
  *      Author: claudiu
  */
 
+#include <src/tests/testDynamicVector.h>
+
+
 void testAll() {
+	testDynamicArray();
 }

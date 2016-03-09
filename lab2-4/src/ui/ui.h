@@ -54,6 +54,12 @@ void deleteCommand(Controller* ctrl);
 void updateCommand(Controller* ctrl);
 
 /**
+ * Filter the vector by a property
+ * ctrl - Controller
+ */
+void filterCommand(Controller* ctrl);
+
+/**
  * Deallocate the memory from controller struct.
  * ctrl - Controller
  */

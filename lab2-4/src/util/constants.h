@@ -17,6 +17,18 @@
 #ifndef LINE_LENGTH
 #define LINE_LENGTH 50
 
+#ifndef FILTER_BY_MONEY
+#define FILTER_BY_MONEY "suma"
+
+#ifndef FILTER_BY_DAY
+#define FILTER_BY_DAY "zi"
+
+#ifndef FILTER_BY_TYPE
+#define FILTER_BY_TYPE "tip"
+
+#endif
+#endif
+#endif
 #endif
 #endif
 #endif

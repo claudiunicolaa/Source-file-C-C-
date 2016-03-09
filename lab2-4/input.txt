@@ -1,4 +1,6 @@
-5#10#90.000000#imbracaminte
+1#10#90.000000#imbracaminte
 2#9#100.000000#altele
 3#9#100.000000#altele
 4#1#9.000000#mancare
+5#1#9.000000#mancare
+6#18#19.000000#mancare

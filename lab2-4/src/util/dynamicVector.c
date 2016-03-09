@@ -5,7 +5,9 @@
  *      Author: claudiu
  */
 
+#include <src/domain/expense.h>
 #include <src/util/dynamicVector.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -84,6 +86,13 @@ Item findByPosition(DynamicVector* vector, int position) {
  * vector - DynamicVector
  */
 void printDynamicVector(DynamicVector* vector) {
+	Expense* item;
+	int i = 0;
+	for (i = 0; i < getSize(vector); i++) {
+		item = findByPosition(vector, i);
+		printf("%4d %4d %8f %8s\n", item->id, item->day, item->money,
+				item->type);
+	}
 }
 
 /**

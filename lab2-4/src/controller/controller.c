@@ -5,10 +5,12 @@
  *      Author: claudiu
  */
 
+#include <math.h>
 #include <src/controller/controller.h>
 #include <src/domain/expense.h>
 #include <src/domain/validator.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * Constructor
@@ -107,6 +109,61 @@ int searchId(Controller* ctrl, int id) {
 		}
 	}
 	return -1;
+}
+
+/**
+ * Filter the vector by money property
+ * ctrl - Controller
+ * money - float
+ */
+DynamicVector* filterByMoney(Controller* ctrl, float money) {
+	DynamicVector* filteredVector = initDynamicVector(
+			ctrl->repo->vector->size + 1);
+	Expense* item;
+	int i = 0;
+	for (i = 0; i < getSize(ctrl->repo->vector); i++) {
+		item = findByPosition(ctrl->repo->vector, i);
+		if (fabs(item->money - money) < 0.001) {
+			add(filteredVector, item);
+		}
+	}
+	return filteredVector;
+}
+/**
+ * Filter the vector by day property
+ * ctrl - Controller
+ * day - int
+ */
+DynamicVector* filterByDay(Controller* ctrl, int day) {
+	DynamicVector* filteredVector = initDynamicVector(
+			ctrl->repo->vector->size + 1);
+	Expense* item;
+	int i = 0;
+	for (i = 0; i < getSize(ctrl->repo->vector); i++) {
+		item = findByPosition(ctrl->repo->vector, i);
+		if (fabs(item->day - day) == 0) {
+			add(filteredVector, item);
+		}
+	}
+	return filteredVector;
+}
+/**
+ * Filter the vector by type property
+ * ctrl - Controller
+ * type - char*
+ */
+DynamicVector* filterByType(Controller* ctrl, char* type) {
+	DynamicVector* filteredVector = initDynamicVector(
+			ctrl->repo->vector->size + 1);
+	Expense* item;
+	int i = 0;
+	for (i = 0; i < getSize(ctrl->repo->vector); i++) {
+		item = findByPosition(ctrl->repo->vector, i);
+		if (strcmp(item->type, type) == 0) {
+			add(filteredVector, item);
+		}
+	}
+	return filteredVector;
 }
 
 /**

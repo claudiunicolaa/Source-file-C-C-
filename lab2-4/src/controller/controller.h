@@ -72,6 +72,25 @@ void updateAction(Controller* ctrl, int id, int position, int day, float money,
 int searchId(Controller* ctrl, int id);
 
 /**
+ * Filter the vector by money property
+ * ctrl - Controller
+ * money - float
+ */
+DynamicVector* filterByMoney(Controller* ctrl, float money);
+/**
+ * Filter the vector by day property
+ * ctrl - Controller
+ * day - int
+ */
+DynamicVector* filterByDay(Controller* ctrl, int day);
+/**
+ * Filter the vector by type property
+ * ctrl - Controller
+ * type - char*
+ */
+DynamicVector* filterByType(Controller* ctrl, char* type);
+
+/**
  * Deallocate the memory of controller
  * ctrl - Controller
  */

@@ -12,6 +12,7 @@
 #include <src/util/constants.h>
 #include <src/util/dynamicVector.h>
 #include <stdio.h>
+#include <string.h>
 
 /**
  * Put the menu in console
@@ -21,6 +22,7 @@ void printMenu() {
 	puts("2.Afisare cheltuieli.");
 	puts("3.Sterge cheltuiala.");
 	puts("4.Modifica cheltuiala.");
+	puts("5.Filtrare");
 	puts("0.Iesire.\n");
 	puts("Dati o comanda: ");
 }
@@ -70,13 +72,7 @@ void addCommand(Controller* ctrl) {
  */
 void showCommand(Controller* ctrl) {
 	DynamicVector* vector = getAllAction(ctrl);
-	Expense* item;
-	int i = 0;
-	for (i = 0; i < getSize(vector); i++) {
-		item = findByPosition(vector, i);
-		printf("%4d %4d %8f %8s\n", item->id, item->day, item->money,
-				item->type);
-	}
+	printDynamicVector(vector);
 }
 
 /**
@@ -110,7 +106,6 @@ void updateCommand(Controller* ctrl) {
 		int day = 1;
 		float money = 0;
 		char type[20];
-		puts("Adauga cheltuiala:");
 		puts("Introdu ziua(1-31):");
 		scanf("%d", &day);
 		puts("Introdu suma:");
@@ -131,6 +126,42 @@ void updateCommand(Controller* ctrl) {
 	} else
 		puts("Id-ul nu exista.");
 
+}
+
+/**
+ * Filter the vector by a property
+ * ctrl - Controller
+ */
+void filterCommand(Controller* ctrl) {
+	char property[4];
+	puts("Cheluieliile pot fi filtrare dupa: suma, zi, tip");
+	puts("Alege dupa ce doresti sa fie filtrate datele:");
+	scanf("%s", property);
+	while (1) {
+		if (strcmp(property, FILTER_BY_MONEY) == 0) {
+			float money = 0;
+			puts("Introdu suma: ");
+			scanf("%f", &money);
+			printDynamicVector(filterByMoney(ctrl, money));
+			break;
+		} else if (strcmp(property, FILTER_BY_DAY) == 0) {
+			int day = 0;
+			puts("Introdu ziua: ");
+			scanf("%d", &day);
+			printDynamicVector(filterByDay(ctrl, day));
+			break;
+		} else if (strcmp(property, FILTER_BY_TYPE) == 0) {
+			char type[20];
+			puts("Introdu tipul(mancare, transport, "
+					"telefon&internet,imbracaminte,altele): ");
+			scanf("%s", type);
+			printDynamicVector(filterByType(ctrl, type));
+			break;
+		} else {
+			puts("Acest criteriu nu este valid!");
+			break;
+		}
+	}
 }
 
 /**
@@ -164,6 +195,9 @@ void runUi(Controller* ctrl) {
 			break;
 		case 4:
 			updateCommand(ctrl);
+			break;
+		case 5:
+			filterCommand(ctrl);
 			break;
 		case 0:
 			writeAll(ctrl);
