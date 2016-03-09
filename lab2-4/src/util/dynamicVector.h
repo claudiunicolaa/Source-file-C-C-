@@ -31,12 +31,6 @@ DynamicVector* initDynamicVector(int capacity);
  */
 void add(DynamicVector* vector, Item item);
 
-/**
- * Update an item from DynamicVector.
- * vector - DynamicVector
- * item - Item
- */
-void update(DynamicVector* vector, Item item);
 
 /**
  * Delete an item from DynamicVector.

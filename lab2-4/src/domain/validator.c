@@ -21,8 +21,8 @@ char** validateExpense(Expense* item) {
 		errors[e] = (char*) malloc(sizeof(char) * 40);
 		errors[e] = "Ziua trebuie sa fie intre 1 si 31";
 	}
-	char types[] = "mancare,transport,tv&internet,imbracaminte,altele";
-	char* type = (char*) malloc(sizeof(char) * strlen(item->type) + 1);
+	char types[] = "mancare,transport,tv&internet,imbracaminte,altele,";
+	char* type = (char*) malloc(sizeof(char) * (strlen(item->type) + 1));
 	strcpy(type, item->type);
 	strcat(type, ",");
 	if (strstr(types, type) == NULL) {
@@ -43,4 +43,17 @@ char** validateExpense(Expense* item) {
  */
 int getErrorsNumber(char** errors) {
 	return (int*) errors[0];
+}
+
+/**
+ * Deallocate the memory of errors array
+ * errors - char**
+ */
+void freeErrors(char** errors) {
+	int i = 0;
+	for (i = 1; i < getErrorsNumber(errors); i++) {
+		free(errors[i]);
+	}
+	free(errors[0]);
+	free(errors);
 }

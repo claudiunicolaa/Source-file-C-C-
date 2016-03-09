@@ -24,4 +24,10 @@ char** validateExpense(Expense* item);
  */
 int getErrorsNumber(char** errors);
 
+/**
+ * Deallocate the memory of errors array
+ * errors - char**
+ */
+void freeErrors(char** errors);
+
 #endif /* DOMAIN_VALIDATOR_H_ */

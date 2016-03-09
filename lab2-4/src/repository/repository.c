@@ -11,6 +11,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * Constructor
+ * fileName - char
+ */
 Repository* initRepository(char* fileName) {
 	Repository* repo = (Repository*) malloc(sizeof(Repository));
 	repo->fileName = (char*) malloc(sizeof(char) * strlen(fileName) + 1);
@@ -19,14 +23,30 @@ Repository* initRepository(char* fileName) {
 	repo->vector = loadFile(repo);
 	return repo;
 }
+
+/**
+ * Add an expense to vector.
+ * repo - Repository
+ * item - Expense
+ */
 void addItem(Repository* repo, Expense* item) {
 	add(repo->vector, item);
 }
 
+/**
+ * Get the last id from vector.
+ * repo - Repository
+ */
 int getLastId(Repository* repo) {
 	int id = 0;
-	id = getSize(repo->vector) + 1;
-	return id;
+	int i = 0;
+	Expense* item;
+	for (i = 0; i < getSize(repo->vector); i++) {
+		item = findByPosition(repo->vector, i);
+		if (item->id > id)
+			id = item->id;
+	}
+	return id + 1;
 }
 
 /**
@@ -55,6 +75,10 @@ Expense* readLine(FILE* file) {
 	return item;
 }
 
+/**
+ * Read the vector from file
+ * repo - Repository
+ */
 DynamicVector* loadFile(Repository* repo) {
 	Expense* item;
 	FILE* file;
@@ -70,11 +94,20 @@ DynamicVector* loadFile(Repository* repo) {
 	return repo->vector;
 }
 
+/**
+ * Write a line in file
+ * file - FILE
+ * item - Expense
+ */
 void writeLine(FILE* file, Expense* item) {
 	fprintf(file, "%d#%d#%f#%s\n", item->id, item->day, item->money,
 			item->type);
 }
 
+/**
+ * Write the vector in file
+ * repo - Repository
+ */
 void writeFile(Repository* repo) {
 	FILE* file;
 	file = fopen(repo->fileName, "w");
@@ -85,8 +118,21 @@ void writeFile(Repository* repo) {
 	fclose(file);
 }
 
+/**
+ * Delete an expense from vector
+ * repo - Repository
+ * item - Expense
+ */
 void deleteItem(Repository* repo, Expense* item) {
 	delete(repo->vector, item);
 }
+
+/**
+ * Deallocate the repository
+ * repo - Repository
+ */
 void freeRepository(Repository* repo) {
+	free(repo->fileName);
+	destroyDynamicVector(repo->vector);
+	free(repo);
 }

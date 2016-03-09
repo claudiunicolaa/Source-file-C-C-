@@ -53,14 +53,6 @@ void add(DynamicVector* vector, Item item) {
 }
 
 /**
- * Update an item from DynamicVector.
- * vector - DynamicVector
- * item - Item
- */
-void update(DynamicVector* vector, Item item) {
-}
-
-/**
  * Delete an item from DynamicVector.
  * vector - DynamicVector
  * item - Item
@@ -100,6 +92,7 @@ void printDynamicVector(DynamicVector* vector) {
  * position - integer
  */
 void destroyByPosition(DynamicVector* vector, int position) {
+	free(vector->items[position]);
 }
 
 /**
@@ -107,4 +100,7 @@ void destroyByPosition(DynamicVector* vector, int position) {
  * vector - DynamicVector
  */
 void destroyDynamicVector(DynamicVector* vector) {
+	int i = 0;
+	for (i = 0; i < getSize(vector); i++)
+		free(vector->items[i]);
 }
