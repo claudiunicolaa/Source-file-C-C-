@@ -23,6 +23,7 @@ void printMenu() {
 	puts("3.Sterge cheltuiala.");
 	puts("4.Modifica cheltuiala.");
 	puts("5.Filtrare");
+	puts("6.Sortare");
 	puts("0.Iesire.\n");
 	puts("Dati o comanda: ");
 }
@@ -135,7 +136,7 @@ void updateCommand(Controller* ctrl) {
 void filterCommand(Controller* ctrl) {
 	char property[4];
 	puts("Cheluieliile pot fi filtrare dupa: suma, zi, tip");
-	puts("Alege dupa ce doresti sa fie filtrate datele:");
+	puts("Alege dupa ce doresti sa fie filtrate datele: ");
 	scanf("%s", property);
 	while (1) {
 		if (strcmp(property, FILTER_BY_MONEY) == 0) {
@@ -156,6 +157,37 @@ void filterCommand(Controller* ctrl) {
 					"telefon&internet,imbracaminte,altele): ");
 			scanf("%s", type);
 			printDynamicVector(filterByType(ctrl, type));
+			break;
+		} else {
+			puts("Acest criteriu nu este valid!");
+			break;
+		}
+	}
+}
+
+/**
+ * Sort the vector by property asc and desc
+ * ctrl - Controller
+ */
+void sortCommand(Controller* ctrl) {
+	char property[4];
+	char order[4];
+	//TODO: user-ul sa aleaga ordinea asc/desc
+	puts("Cheltuieliile pot fi sortate dupa: suma, tip");
+	puts("Alege dupa ce doresti sa fie sortate datele: ");
+	scanf("%s", property);
+	while (1) {
+		if (strcmp(property, SORT_BY_MONEY) == 0) {
+			puts("Alege ordinea in care doresti sa fie sortate "
+					"datele: crescator(asc), descrescator(desc)");
+			scanf("%s", order);
+			printDynamicVector(sortByMoney(ctrl, order));
+			break;
+		} else if (strcmp(property, SORT_BY_TYPE) == 0) {
+			puts("Alege ordinea in care doresti sa fie sortate "
+					"datele: crescator(asc), descrescator(desc)");
+			scanf("%s", order);
+			printDynamicVector(sortByType(ctrl, order));
 			break;
 		} else {
 			puts("Acest criteriu nu este valid!");
@@ -198,6 +230,9 @@ void runUi(Controller* ctrl) {
 			break;
 		case 5:
 			filterCommand(ctrl);
+			break;
+		case 6:
+			sortCommand(ctrl);
 			break;
 		case 0:
 			writeAll(ctrl);

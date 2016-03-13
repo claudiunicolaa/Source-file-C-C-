@@ -26,6 +26,14 @@
 #ifndef FILTER_BY_TYPE
 #define FILTER_BY_TYPE "tip"
 
+#ifndef SORT_BY_TYPE
+#define SORT_BY_TYPE "tip"
+
+#ifndef SORT_BY_MONEY
+#define SORT_BY_MONEY "suma"
+
+#endif
+#endif
 #endif
 #endif
 #endif

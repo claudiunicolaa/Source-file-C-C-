@@ -28,6 +28,22 @@ Expense* initExpense(int id, int day, float money, char* type) {
 }
 
 /**
+ * Get the money
+ * item - Expense
+ */
+float getMoney(Expense* item) {
+	return item->money;
+}
+
+/**
+ * Get the type
+ * item - Expense
+ */
+char* getType(Expense* item) {
+	return item->type;
+}
+
+/**
  * Destructor
  * item - Expense
  */

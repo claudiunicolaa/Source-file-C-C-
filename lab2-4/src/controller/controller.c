@@ -129,6 +129,7 @@ DynamicVector* filterByMoney(Controller* ctrl, float money) {
 	}
 	return filteredVector;
 }
+
 /**
  * Filter the vector by day property
  * ctrl - Controller
@@ -147,6 +148,7 @@ DynamicVector* filterByDay(Controller* ctrl, int day) {
 	}
 	return filteredVector;
 }
+
 /**
  * Filter the vector by type property
  * ctrl - Controller
@@ -164,6 +166,76 @@ DynamicVector* filterByType(Controller* ctrl, char* type) {
 		}
 	}
 	return filteredVector;
+}
+
+/**
+ *
+ */
+int compareMoneyAsc(const void* a, const void* b) {
+	Expense* pa = *(Expense**) a;
+	Expense* pb = *(Expense**) b;
+	return getMoney(pb) - getMoney(pa);
+}
+
+/**
+ *
+ */
+int compareMoneyDesc(const void* a, const void* b) {
+	Expense* pa = *(Expense**) a;
+	Expense* pb = *(Expense**) b;
+	return getMoney(pa) - getMoney(pb);
+}
+
+/**
+ * Sort the vector by money property
+ * ctrl - Controller
+ * money - float
+ */
+DynamicVector* sortByMoney(Controller* ctrl, char* order) {
+	DynamicVector* sortedVector = getAllAction(ctrl);
+	int (*compare)(const void*a, const void* b);
+	if (strcmp(order, "asc")) {
+		compare = compareMoneyAsc;
+	} else if (strcmp(order, "desc")) {
+		compare = compareMoneyDesc;
+	}
+	qsort(sortedVector->items, sortedVector->size, sizeof(Expense*), compare);
+	return sortedVector;
+}
+
+/**
+ *
+ */
+int compareTypeAsc(const void* a, const void* b) {
+	Expense* pa = *(Expense**) a;
+	Expense* pb = *(Expense**) b;
+	return strcmp(getType(pb), getType(pa));
+}
+
+/**
+ *
+ */
+int compareTypeDesc(const void* a, const void* b) {
+	Expense* pa = *(Expense**) a;
+	Expense* pb = *(Expense**) b;
+	return strcmp(getType(pa), getType(pb));
+}
+
+/**
+ * Sort the vector by type propery
+ * ctrl - Controller
+ * type - char*
+ */
+DynamicVector* sortByType(Controller* ctrl, char* order) {
+	DynamicVector* sortedVector = getAllAction(ctrl);
+	int (*compare)(const void*a, const void* b);
+	if (strcmp(order, "asc")) {
+		compare = compareTypeAsc;
+	} else if (strcmp(order, "desc")) {
+		compare = compareTypeDesc;
+	}
+	qsort(sortedVector->items, sortedVector->size, sizeof(Expense*), compare);
+	return sortedVector;
 }
 
 /**

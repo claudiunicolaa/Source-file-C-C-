@@ -60,6 +60,12 @@ void updateCommand(Controller* ctrl);
 void filterCommand(Controller* ctrl);
 
 /**
+ * Sort the vector by property asc and desc
+ * ctrl - Controller
+ */
+void sortCommand(Controller* ctrl);
+
+/**
  * Deallocate the memory from controller struct.
  * ctrl - Controller
  */

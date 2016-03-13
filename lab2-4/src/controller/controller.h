@@ -91,6 +91,20 @@ DynamicVector* filterByDay(Controller* ctrl, int day);
 DynamicVector* filterByType(Controller* ctrl, char* type);
 
 /**
+ * Sort the vector by money property
+ * ctrl - Controller
+ * money - float
+ */
+DynamicVector* sortByMoney(Controller* ctrl, char* order);
+
+/**
+ * Sort the vector by type propery
+ * ctrl - Controller
+ * type - char*
+ */
+DynamicVector* sortByType(Controller* ctrl, char* order);
+
+/**
  * Deallocate the memory of controller
  * ctrl - Controller
  */

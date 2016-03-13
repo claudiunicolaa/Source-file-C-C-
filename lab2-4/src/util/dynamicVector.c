@@ -95,6 +95,7 @@ void printDynamicVector(DynamicVector* vector) {
 	}
 }
 
+
 /**
  * Destroy an item
  * vector - DynamicVector
