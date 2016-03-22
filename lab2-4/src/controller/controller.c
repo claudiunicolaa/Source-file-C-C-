@@ -19,6 +19,7 @@
 Controller* initController(Repository* repo) {
 	Controller* ctrl = (Controller*) malloc(sizeof(Controller));
 	ctrl->repo = repo;
+	ctrl->undoVector = initDynamicVector(50);
 	return ctrl;
 }
 
@@ -38,8 +39,10 @@ void addAction(Controller* ctrl, int day, float money, char* type) {
 	if (getErrorsNumber(ctrl->valid) > 0) {
 		destroyExpense(item);
 		return;
-	} else
+	} else {
+		ctrl->undoVector = copyDynamicVector(ctrl->repo->vector);
 		addItem(ctrl->repo, item);
+	}
 }
 
 /**
@@ -66,7 +69,8 @@ void writeAll(Controller* ctrl) {
 int deleteAction(Controller* ctrl, int id) {
 	int search = searchId(ctrl, id);
 	if (search > -1)
-		deleteItem(ctrl->repo, findByPosition(ctrl->repo->vector, search));
+		ctrl->undoVector = copyDynamicVector(ctrl->repo->vector);
+	deleteItem(ctrl->repo, findByPosition(ctrl->repo->vector, search));
 	return search;
 }
 
@@ -87,6 +91,7 @@ void updateAction(Controller* ctrl, int id, int position, int day, float money,
 		destroyExpense(newItem);
 		return;
 	} else {
+		ctrl->undoVector = copyDynamicVector(ctrl->repo->vector);
 		deleteItem(ctrl->repo, findByPosition(ctrl->repo->vector, position));
 		addItem(ctrl->repo, newItem);
 	}
@@ -236,6 +241,19 @@ DynamicVector* sortByType(Controller* ctrl, char* order) {
 	}
 	qsort(sortedVector->items, sortedVector->size, sizeof(Expense*), compare);
 	return sortedVector;
+}
+
+/**
+ *Undo functionality. Destroy the current vector
+ * and copy in her the oldest vector.
+ * ctrl - Controller
+ * vector - DynamicVector
+ */
+void undo(Controller* ctrl) {
+	if (getSize(ctrl->undoVector) > 0) {
+		ctrl->repo->vector = copyDynamicVector(ctrl->undoVector);
+		delete(ctrl->undoVector, getLastItem(ctrl->undoVector));
+	}
 }
 
 /**

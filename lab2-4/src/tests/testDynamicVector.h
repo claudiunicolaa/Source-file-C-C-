@@ -54,4 +54,8 @@ void testFindByPosition();
  */
 void testGetSize();
 
+/**
+ * Test the copy operation
+ */
+void testCopyDynamicVector();
 #endif /* TESTS_TESTDYNAMICVECTOR_H_ */

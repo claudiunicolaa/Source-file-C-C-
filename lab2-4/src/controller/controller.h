@@ -14,6 +14,7 @@
 typedef struct {
 	Repository* repo;
 	char** valid;
+	DynamicVector* undoVector;
 } Controller;
 
 /**
@@ -103,6 +104,16 @@ DynamicVector* sortByMoney(Controller* ctrl, char* order);
  * type - char*
  */
 DynamicVector* sortByType(Controller* ctrl, char* order);
+
+
+
+/**
+ * Undo functionality. Destroy the current vector
+ * and copy in her the oldest vector.
+ * ctrl - Controller
+ * vector - DynamicVector
+ */
+void undo(Controller* ctrl);
 
 /**
  * Deallocate the memory of controller

@@ -20,7 +20,7 @@ void testDynamicArray() {
 	testDelete();
 	testFindByPosition();
 	testGetSize();
-	printf("Tests finish.");
+	testCopyDynamicVector();
 }
 
 /**
@@ -66,7 +66,7 @@ void testAdd() {
 	int it = 2;
 	add(vector, &it);
 	//test if was added findByPosition
-	assert((*(int*) findByPosition(vector, 0)) == 2);
+	assert((*(int* ) findByPosition(vector, 0)) == 2);
 	//add item
 	char it2[3] = "abC";
 	add(vector, &it2);
@@ -112,7 +112,7 @@ void testFindByPosition() {
 	int it = 1000;
 	add(vector, &it);
 	//test if find on position 0
-	assert((*(int *) findByPosition(vector, 0)) == 1000);
+	assert((*(int * ) findByPosition(vector, 0)) == 1000);
 	//destroy
 	tearDown(vector);
 }
@@ -142,4 +142,26 @@ void testGetSize() {
 	assert(vector->size == 2);
 	//destroy
 	tearDown(vector);
+}
+
+/**
+ * Test the copy operation
+ */
+void testCopyDynamicVector() {
+	//set up
+	DynamicVector* vector = setUp();
+	DynamicVector* undoVector = setUp();
+	//add 4 items
+	int it1 = 0;
+	int it2 = 1;
+	int it3 = 2;
+	int it4 = 3;
+	add(vector, &it1);
+	add(vector, &it2);
+	add(vector, &it3);
+	add(vector, &it4);
+	undoVector = copyDynamicVector(vector);
+	assert(undoVector->capacity == 20);
+	assert(undoVector->size == 4);
+	assert(*(int* )undoVector->items[3] == 3);
 }

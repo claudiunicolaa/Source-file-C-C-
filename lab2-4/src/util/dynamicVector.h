@@ -65,6 +65,17 @@ void printDynamicVector(DynamicVector* vector);
 void destroyByPosition(DynamicVector* vector, int position);
 
 /**
+ * Get the last item of vector
+ */
+Item getLastItem(DynamicVector* vector);
+
+/**
+ * Copy the dynamic vector
+ * sourceVector - DynamicVector
+ */
+DynamicVector* copyDynamicVector(DynamicVector* sourceVector);
+
+/**
  * Memory free.
  * vector - DynamicVector
  */

@@ -24,6 +24,7 @@ void printMenu() {
 	puts("4.Modifica cheltuiala.");
 	puts("5.Filtrare");
 	puts("6.Sortare");
+	puts("7.Undo");
 	puts("0.Iesire.\n");
 	puts("Dati o comanda: ");
 }
@@ -197,6 +198,14 @@ void sortCommand(Controller* ctrl) {
 }
 
 /**
+ * Undo the last operation
+ * ctrl - Controller
+ */
+void undoCommand(Controller* ctrl) {
+	undo(ctrl);
+}
+
+/**
  * Deallocate the memory from controller struct.
  * ctrl - Controller
  */
@@ -233,6 +242,9 @@ void runUi(Controller* ctrl) {
 			break;
 		case 6:
 			sortCommand(ctrl);
+			break;
+		case 7:
+			undoCommand(ctrl);
 			break;
 		case 0:
 			writeAll(ctrl);

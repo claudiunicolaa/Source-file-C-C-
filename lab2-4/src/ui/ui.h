@@ -66,6 +66,12 @@ void filterCommand(Controller* ctrl);
 void sortCommand(Controller* ctrl);
 
 /**
+ * Undo the last operation
+ * ctrl - Controller
+ */
+void undoCommand(Controller* ctrl);
+
+/**
  * Deallocate the memory from controller struct.
  * ctrl - Controller
  */

@@ -95,6 +95,25 @@ void printDynamicVector(DynamicVector* vector) {
 	}
 }
 
+/**
+ * Get the last item of vector
+ */
+Item getLastItem(DynamicVector* vector) {
+	return vector->items[vector->size - 1];
+}
+
+/**
+ * Copy the dynamic vector
+ * sourceVector - DynamicVector
+ */
+DynamicVector* copyDynamicVector(DynamicVector* sourceVector) {
+	DynamicVector* destinationVector = initDynamicVector(sourceVector->capacity);
+	int i;
+	for (i = 0; i < getSize(sourceVector); i++) {
+		add(destinationVector, sourceVector->items[i]);
+	}
+	return destinationVector;
+}
 
 /**
  * Destroy an item
