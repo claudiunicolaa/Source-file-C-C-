@@ -1,0 +1,8 @@
+1|Ion|L. Rebreanu|Roman|1950
+2|Enigma Otiliei|G. Calinescu|Roman|1900
+3|Moara cu Noroc|I. Slavici|Nuvela|2011
+4|Mara|I. Slavici|Nuvela|1965
+5|Marile sperante|C. Dickens|Nuvela|1800
+6|d|d|d|1900
+7|d|d|d|1900
+8|d|d|d|1900
