@@ -51,4 +51,4 @@
 
 **Bookstore GUI(lab 10-11)**
 
-*`Bookstore V2 with using Qt`*
+*`Bookstore V2 using Qt`*
