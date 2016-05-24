@@ -52,3 +52,7 @@
 **Bookstore GUI(lab 10-11)**
 
 *`Bookstore V2 using Qt`*
+
+**Simulare(lab 12)**
+
+*`See the requirement in subiect.pdf (RO)`*
