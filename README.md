@@ -56,3 +56,15 @@
 **Simulare(lab 12)**
 
 *`See the requirement in subiect.pdf (RO)`*
+
+**BookstoreGUI-with cart(lab 13-14)**
+
+*`Bookstore GUI with new features:`*
+
+*`- 2 buttons that open new windows CartGUI, CartReadOnlyGUI`*
+
+*`- CartGUI contain 2 buttons Empty, Generate Cart and a model that inherits QAbstractTabelModel`*
+
+*`- CartReadOnlyGUI override the paintEvent from QWidget and draws an ellipse(random position) for each book from cart`*
+
+*`- every window show same cart using the design pattern Observer`*
