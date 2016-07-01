@@ -62,7 +62,7 @@ void Practical_Exam_OOP::buildWidgets() {
 	std::vector<std::string> profesori = this->ctrl.getProfesori();
 	for (auto i = profesori.begin(); i != profesori.end(); i++) {
 		auto p = *i;
-		QWidget *prof = new ProfesorGUI(this->ctrl.getRepo(), p);
+		QWidget *prof = new ProfesorGUI(this->ctrl, p);
 		prof->show();
 	}
 	//new profesor gui pt fiecare, trimite nume si note

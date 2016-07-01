@@ -8,7 +8,7 @@
 #include "Observer.h"
 #include <assert.h>
 
-class Repository :public Observable {
+class Repository  {
 private:
 	std::vector<Nota> note;
 	std::string fileName;
@@ -37,7 +37,6 @@ public:
 	*/
 	void addNota(const Nota& nota) {
 		this->note.push_back(nota);
-		notify();
 	}
 
 	/*
@@ -51,7 +50,6 @@ public:
 				return;
 			}
 		}
-		notify();
 	}
 	/*
 	Write in file

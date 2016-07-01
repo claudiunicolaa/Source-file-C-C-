@@ -202,7 +202,6 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="GeneratedFiles\ui_practical_exam_oop.h" />
-    <ClInclude Include="intrarerere.h" />
     <ClInclude Include="MyExceptions.h" />
     <ClInclude Include="Nota.h" />
     <ClInclude Include="Observer.h" />

@@ -3,7 +3,7 @@
 #include "Repository.h"
 
 
-class Controller {
+class Controller :public Observable {
 private:
 	Repository &repo;
 	NotaValidator &validator;
@@ -26,6 +26,8 @@ public:
 		}
 		validator.validate(nota);
 		repo.addNota(nota);
+
+		notify();
 	}
 
 	Repository& getRepo() {
@@ -34,6 +36,10 @@ public:
 
 	std::vector<std::string> getProfesori() {
 		return repo.getProfi();
+	}
+
+	std::vector<float> getNote(std::string profesor) {
+		return repo.getNote(profesor);
 	}
 
 	~Controller() {

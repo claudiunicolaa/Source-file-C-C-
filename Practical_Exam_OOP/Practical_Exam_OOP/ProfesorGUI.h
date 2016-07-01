@@ -6,14 +6,14 @@
 
 class ProfesorGUI : public QWidget, public Observer {
 private:
-	Repository& repo;
+	Controller& ctrl;
 	std::string profesor;
 	std::vector<float> note;
 	QListWidget *list;
 	QVBoxLayout *ly;
 
 	void initGUI() {
-		repo.addObserver(this);
+		ctrl.addObserver(this);
 		ly = new QVBoxLayout();
 		this->setWindowTitle((QString::fromStdString(this->profesor)));
 		for (auto it = note.begin(); it != note.end(); ++it) {
@@ -37,7 +37,7 @@ private:
 	}
 
 	void refresh() {
-		this->note = repo.getNote(this->profesor);
+		this->note = ctrl.getNote(this->profesor);
 		clearLy(ly);
 
 		for (auto it = note.begin(); it != note.end(); ++it) {
@@ -50,8 +50,8 @@ private:
 	}
 
 public:
-	ProfesorGUI(Repository& repo, std::string profesor) : repo(repo), profesor(profesor) {
-		this->note = repo.getNote(this->profesor);
+	ProfesorGUI(Controller& ctrl, std::string profesor) : ctrl(ctrl), profesor(profesor) {
+		this->note = ctrl.getNote(this->profesor);
 		initGUI();
 	}
 
@@ -61,6 +61,6 @@ public:
 	}
 
 	~ProfesorGUI() {
-		repo.removeObserver(this);
+		ctrl.removeObserver(this);
 	}
 };

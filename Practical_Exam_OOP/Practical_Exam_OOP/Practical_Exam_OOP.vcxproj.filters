@@ -96,9 +96,6 @@
     <ClInclude Include="ProfesorGUI.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
-    <ClInclude Include="intrarerere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="intrare.txt" />
